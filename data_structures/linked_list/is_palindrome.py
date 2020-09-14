@@ -29,25 +29,23 @@ def is_palindrome_stack(head):
     if not head or not head.next:
         return True
 
-    # 1. Get the midpoint (slow)
-    slow = fast = cur = head
-    while fast and fast.next:
-        fast, slow = fast.next.next, slow.next
+    # 1. First transverse the list and append  each element into the stack
+    p1=head
+    stack=[]
+    while p1:
+        app=stack.append(p1.val)
+        p1=p1.next
 
-    # 2. Push the second half into the stack
-    stack = [slow.val]
-    while slow.next:
-        slow = slow.next
-        stack.append(slow.val)
-
-    # 3. Comparison
-    while stack:
-        if stack.pop() != cur.val:
+    # 2. again transverse the list and compare the list while popping through the stack, if element is not equal then its not a palindrom
+    while head:
+        i=stack.pop()
+        if head.data==i:
+            return True
+        else:
             return False
-        cur = cur.next
-
+            break
+        head=head.next
     return True
-
 
 def is_palindrome_dict(head):
     if not head or not head.next:
